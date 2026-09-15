@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout(~{::main})}">
+<body>
+    <main>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Transações</h2>
+            <a href="/transacoes/nova" class="btn btn-primary">Nova Transação</a>
+        </div>
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Tipo</th>
+                    <th>Valor (R$)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="transacao : ${transacoes}">
+                    <td th:text="${#temporals.format(transacao.data, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${transacao.descricao}"></td>
+                    <td th:text="${transacao.categoria}"></td>
+                    <td th:text="${transacao.tipo}"></td>
+                    <td th:text="${transacao.valor}"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(transacoes)}">
+                    <td colspan="5" class="text-center">Nenhuma transação cadastrada.</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
+
